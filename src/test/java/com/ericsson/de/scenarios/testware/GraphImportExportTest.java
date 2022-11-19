@@ -10,6 +10,8 @@ import static com.ericsson.de.scenarios.impl.graph.GraphNodeFactory.createTestSt
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URL;
+import java.nio.file.Files;
+
 import javax.inject.Named;
 
 import org.junit.Test;
@@ -81,7 +83,7 @@ public class GraphImportExportTest extends ScenarioTest {
         ScenarioExecutionGraph graph = graph(createTestStepNode("1", "1", 0L, 0L, "{\"dr\":1}", "1.2", "1", "SUCCESS", ""),
                 createTestStepNode("1", "2", 0L, 0L, "{\"dr\":2}", "1.3", "1", "SUCCESS", ""));
 
-        File temp = File.createTempFile("scenario-export", ".graphml");
+        File temp = Files.createTempFile("scenario-export", ".graphml").toFile();
         GraphMlExporter graphMlExporter = new GraphMlExporter();
         graphMlExporter.export(graph, new FileWriter(temp));
 
@@ -108,7 +110,7 @@ public class GraphImportExportTest extends ScenarioTest {
 
         ScenarioExecutionGraph graph = ScenarioDebugger.debug(scenario);
 
-        File temp = File.createTempFile("scenario-export-advanced", ".graphml");
+        File temp = Files.createTempFile("scenario-export-advanced", ".graphml").toFile();
         GraphMlExporter graphMlExporter = new GraphMlExporter();
         graphMlExporter.export(graph, new FileWriter(temp));
 
